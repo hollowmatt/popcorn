@@ -14,6 +14,8 @@ gem 'jbuilder', '~> 1.2'
 gem 'angularjs-rails', "=1.2.6"
 gem 'bootstrap-sass-rails', "=3.0.3.0"
 gem 'underscore-rails', "=1.5.2"
+gem 'devise', "=3.2.2"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

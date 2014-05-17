@@ -12,8 +12,6 @@
 //=require underscore
 //=require angular
 //=require angular-route
+//=require angular-cookies
 //=require_tree .
-//
-//= require jquery
-//= require jquery_ujs
-//= require_tree .
+
