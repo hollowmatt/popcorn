@@ -13,5 +13,7 @@
 //=require angular
 //=require angular-route
 //=require angular-cookies
+//=require angular-resource
+//=require angularjs/rails/resource
 //=require_tree .
 

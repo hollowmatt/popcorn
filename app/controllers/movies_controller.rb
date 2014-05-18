@@ -3,9 +3,8 @@ class MoviesController < ApplicationController
 
 	def create
 		@movie = Movie.new(movie_params)
-
 		if @movie.save
-			render status: :create,
+			render status: :created,
 				json: @movie.as_json
 		else
 			render status: :unprocessable_entity,
