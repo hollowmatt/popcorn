@@ -1,5 +1,5 @@
 angular.module('popcornApp.services')
-	.service('MoviesService', function($http, $q) {
+	.service('MoviesService', function($http, $q, Movie) {
 		this.movies = function(name) {
       var d = $q.defer();
 		  $http({
@@ -18,8 +18,15 @@ angular.module('popcornApp.services')
             description: movie['media$group']['media$description']['$t']
           };
         })
-        console.log(movies);
-        d.resolve(movies);
+
+        var moviePromises = _.map(movies, function(movieData) {
+          var youtubeId = movieData.youtubeId;
+          return Movie.findOrCreateByYoutubeId(youtubeId, movieData);
+        });
+
+        $q.all(moviePromises).then(function(movieResources) {
+          d.resolve(movieResources);
+        });
       },
       function(error) {
         d.reject(error);
