@@ -50,7 +50,7 @@ angular.module('popcornApp.resources', ['rails'])
 			return favorite.then(function(results) {
 				if(results.length > 0) {
 					favorite = results[0];
-					return favorite.delete;
+					return favorite.delete();
 				}
 			});
 		};
@@ -69,6 +69,6 @@ angular.module('popcornApp.resources', ['rails'])
 			});
 			return d.promise;
 		};
-		
+
 		return resource;
 	});
