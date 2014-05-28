@@ -9,10 +9,13 @@ angular.module('popcornApp.controllers')
 		});
 
 		$scope.submitSignup = function() {
-			UserService.login($scope.signup.email).then(function(user) {
+			UserService.signup($scope.signup).then(function(user) {
 				console.log(user);
-				$scope.user = user;
+				//$scope.user = user;
 				$location.path("/");
+			},
+			function(reason) {
+				$scope.signup.errors = reason;
 			});
 		};
 

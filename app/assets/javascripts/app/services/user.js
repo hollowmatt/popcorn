@@ -1,12 +1,40 @@
 angular.module('popcornApp.services')
 	.service('UserService',
-		function($q, $cookieStore, $rootScope) {
+		function($q, $cookieStore, $rootScope, $http) {
 			//login
 			//logout
 			//current_user
 
 			this._user = null;
 			var service = this;
+
+			this.setCurrentUser = function(user) {
+				service._user = user;
+				$cookieStore.put('user', user);
+				$rootScope.$broadcast("user:set", user);
+			};
+
+			this.signup = function(params) {
+				var d = $q.defer();
+				$http({
+					url: '/users',
+					method: 'POST',
+					data: {
+						user: params
+					}
+				}).success(function(response) {
+					var user = response.data.user;
+					user.auth_token = response.data.auth_token;
+
+					service.setCurrentUser(user);
+
+					d.resolve(user);
+				}).error(function(reason) {
+					d.reject(reason);
+				});
+
+				return d.promise;
+			}; 
 
 			this.setCurrentUser = function(u) {
 				service._user = u;
