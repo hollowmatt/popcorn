@@ -42,14 +42,27 @@ angular.module('popcornApp.services')
 				$rootScope.$broadcast("user:set", u);
 			};
 
-			this.login = function(email) {
+			this.login = function(params) {
 				var d = $q.defer();
-				var user = {
-					email: email,
-					id: 1
-				};
-				service.setCurrentUser(user);
-				d.resolve(user);
+				$http({
+					url: '/users/sign_in',
+					method: 'POST',
+					data: {
+						user: params
+					}
+				}).success(function(response) {
+					console.log(response);
+					if(response.success) {
+						var user = response.data.user;
+						user.auth_token = response.data.auth_token;
+						service.setCurrentUser(user);
+						d.resolve(user);
+					} else {
+						d.reject(response);
+					}
+				}).error(function(reason){
+					d.reject(reason);
+				});
 				return d.promise;
 			};
 

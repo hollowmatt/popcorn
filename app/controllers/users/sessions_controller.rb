@@ -18,6 +18,17 @@ class Users::SessionsController < DeviseController
 			}
 	end
 
+	def destroy
+		resource = User.find_for_database_authentication(id: params[:user][:id])
+		return failure unless resource
+		resource.clear_authentication_token
+		render status: 200,
+			json: {
+				success: true,
+				info: "Logged Out"
+			}
+	end
+
 	def failure
 		warden.custom_failure!
 		render status: 200,

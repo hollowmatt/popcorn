@@ -20,9 +20,9 @@ angular.module('popcornApp.controllers')
 		};
 
 		$scope.submitLogin = function() {
-			UserService.login($scope.login.email).then(function(user) {
+			UserService.login($scope.login).then(function(user) {
 				console.log(user);
-				$scope.user = user;
+				//$scope.user = user;
 				$location.path("/");
 			});
 		};
