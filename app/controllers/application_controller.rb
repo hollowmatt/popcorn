@@ -33,6 +33,6 @@ class ApplicationController < ActionController::Base
 
     def reject?(user_id)
       puts ("User: #{user_id}, current user: #{@current_user.id}")
-      user_id != @current_user.id.to_s
+      user_id.to_s != @current_user.id.to_s
     end
 end
