@@ -21,7 +21,7 @@ class Users::SessionsController < DeviseController
 
 	def destroy
 		return permission_denied if reject?(params[:id])
-		
+
 		resource = User.find_for_database_authentication(id: params[:user][:id])
 		return failure unless resource
 		resource.clear_authentication_token
@@ -41,4 +41,4 @@ class Users::SessionsController < DeviseController
 				data: {}
 			}
 	end
-end
+end 

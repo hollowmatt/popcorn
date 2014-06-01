@@ -3,7 +3,8 @@ class UsersController < ApplicationController
 	before_filter :authenticate_user_from_token!, :only => [:index, :movies]
 	def index
 		
-		return permission_denied if reject?(params[:id])
+		return permission_denied if (reject?(params[:id]) || 
+			(params[:email] == @current_user.email))
 		
 		@users = User.where(params.permit(:id, :email))
 		if @users
