@@ -2,10 +2,9 @@ class UsersController < ApplicationController
 
 	before_filter :authenticate_user_from_token!, :only => [:index, :movies]
 	def index
-		if reject?(params[:id])
-			return permission_denied
-		end
-
+		
+		return permission_denied if reject?(params[:id])
+		
 		@users = User.where(params.permit(:id, :email))
 		if @users
 			render status: :ok,
@@ -17,9 +16,7 @@ class UsersController < ApplicationController
 	end
 
 	def movies
-		if reject?(params[:id])
-			return permission_denied
-		end
+		return permission_denied if reject?(params[:id])
 
 		@user = User.where(:id => params[:id]).first
 
@@ -33,5 +30,5 @@ class UsersController < ApplicationController
 			}
 		end
 	end
-
+ 
 end
