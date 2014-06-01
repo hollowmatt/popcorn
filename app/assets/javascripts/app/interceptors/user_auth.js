@@ -1,6 +1,6 @@
 angular.module('popcornApp.interceptors')
 	.factory('UserAuthInterceptor',
-     function($rootScope, $q) {
+     function($rootScope, $q, AuthService) {
        return {
          'request': function(req) {
            console.log("making a request");
