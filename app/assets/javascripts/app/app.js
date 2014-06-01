@@ -4,8 +4,12 @@ angular.module('popcornApp', [
 	'popcornApp.controllers',
 	'popcornApp.services',
 	'popcornApp.directives',
-	'popcornApp.resources'
+	'popcornApp.resources',
+	'popcornApp.interceptors'
 ])
+.config(function($httpProvider) {
+  $httpProvider.interceptors.push('UserAuthInterceptor');
+})
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when('/movie/:movie_id',
