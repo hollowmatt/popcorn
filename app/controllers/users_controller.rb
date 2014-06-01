@@ -11,4 +11,18 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def movies
+		@user = User.where(:id => params[:id]).first
+
+		if @user
+			render status: :ok,
+			json: @user.movies.as_json
+		else
+			render status: :not_found,
+			json: {
+				error: "User #{params[:id]} not found"
+			}
+		end
+	end
+
 end

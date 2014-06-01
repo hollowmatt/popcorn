@@ -77,5 +77,16 @@ angular.module('popcornApp.resources', ['rails'])
 			url: "/users",
 			name: 'user'
 		});
+
+		resource.prototype.favoriteMovies = function() {
+			var self = this;
+			return resource
+				.$get(self.$url('movies'))
+				.then(function(movies) {
+					self.favoriteMovies = movies;
+					return self.favoriteMovies;
+				});
+		};
+		
 		return resource;
 	});
