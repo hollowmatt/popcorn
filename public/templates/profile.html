@@ -5,7 +5,19 @@
 				<h1>{{user.email}}</h1>
 				<h2>Favorites</h2>
 				<div class="favorites">
-					0 Favorites
+					<div ng-if"!favoriteMovies">
+						No Favorites
+					</div>
+
+					<div ng-if="favoriteMovies">
+						<ul>
+							<li ng-repeat="movie in favoriteMovies">
+								<a href="/movie/{{movie.youtubeId}}">
+									{{movie.title}}
+								</a>
+							</li>
+						</ul>
+					</div>
 				</div>	
 			</div>
 		</div>

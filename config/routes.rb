@@ -7,6 +7,8 @@ Popcorn::Application.routes.draw do
   resources :movies
   resources :favorites
 
+  get "users", :to => 'users#index'
+  
   get "popcorn/index"
   root 'popcorn#index'
 

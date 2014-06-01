@@ -71,4 +71,11 @@ angular.module('popcornApp.resources', ['rails'])
 		};
 
 		return resource;
+	})
+	.factory('User', function(railsResourceFactory){
+		var resource = railsResourceFactory({
+			url: "/users",
+			name: 'user'
+		});
+		return resource;
 	});
